@@ -10,6 +10,9 @@ function queue(){
 	this.input = null;
 	this.arr = [];
 	this.todo = null;
+	this.search = null;
+	this.time = null;
+	this.lists = [];
 }
 
 queue.prototype = {
@@ -18,7 +21,8 @@ queue.prototype = {
 		this.outBtn = document.getElementById("out-btn");
 		this.input = document.getElementById("input");
 		this.todo =document.getElementById("todo");
-		_this = this;
+		this.search = document.getElementById("search");
+		var _this = this;
 		this.inBtn.onclick = function(e){
 			_this.handleIn(e);
 		}
@@ -27,26 +31,27 @@ queue.prototype = {
 		}
 		this.todo.onclick = function(e){
 			_this.handleDel(e);
+		},
+		this.search.onkeyup = function(e){
+			_this.handleSearch(e);
 		}
 	},
 	mapToHTML(){		//将数组遍历成str然后写成html
-		_this = this;
+		var _this = this;
 		var str = '';
 		this.arr.map(function(item,index){
 			str += '<li data-index = ' + index + '>' + item + '  </li>';
 		});
 		this.todo.innerHTML = str;
+		this.saveLists();
+	},
+	saveLists(){
+		this.lists= this.todo.childNodes;
 	},
 	handleIn(e){	//点击按钮从左或右输入
 		var dataValue = e.target.getAttribute("data-value");
 		var value = this.input.value;
-		var reg = /^\d+$/;	//判断是否为数字的正则
 		if(!dataValue) return;
-		if(!reg.test(value)){
-			alert("不是数字，请重新输入");
-			this.input.value = '';
-			return;
-		}
 		if(dataValue === "left-in"){
 			this.arr.unshift(this.input.value);
 			this.input.value = '';
@@ -75,5 +80,19 @@ queue.prototype = {
 		if(!index) return;
 		this.arr.splice(index,1);
 		this.mapToHTML();
+	},
+	handleSearch(e){
+		var lists = this.lists;
+		var value = e.target.value;
+		clearTimeout(this.time);
+		this.time = setTimeout(function(){
+			for(var i =0; i<lists.length; i++){
+				if(lists[i].innerHTML.indexOf(value)>=0 && value!=""){
+					lists[i].className = "high-light";
+				}else{
+					lists[i].className = "";
+				}
+			}
+		},100);
 	}
 }

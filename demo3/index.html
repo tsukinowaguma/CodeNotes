@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>input</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		li{
+			list-style: none;
+			display: inline-block;
+			background-color: brown;
+			opacity: 0.7;
+			margin-left: 5px;
+			padding: 5px;
+			text-align: center;
+			cursor: pointer;
+			color: white;
+		}
+		.high-light{
+			color: orange;
+			background-color: yellow;
+			opacity: 1;
+		}
+	</style>
+	<script src="./index.js"></script>
+</head>
+<body>
+	<div>
+		<textarea id="input"></textarea>
+		<div id="in-btn">
+			<button data-value="left-in">左侧入</button>
+			<button data-value="right-in">右侧入</button>
+		</div>
+		<div id="out-btn">
+			<button data-value="left-out">左侧出</button>
+			<button data-value="right-out">右侧出</button>
+		</div>
+	</div>
+	<div>
+		<span>查询:</span>
+		<input type="text" id="search" />
+	</div>
+	<ul id="todo">
+	</ul>
+</body>
+</html>
