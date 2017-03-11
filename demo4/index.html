@@ -10,7 +10,8 @@
 			height: 60%;
 			padding: 20px;
 			display: flex;
-			margin: 10px;
+			margin: 5px;
+			background-color: #fff;
 		}
 		.blue{
 			background-color: blue;
@@ -22,31 +23,57 @@
 		<div>
 			<div>
 				<div></div>
+				<div></div>
 			</div>
 			<div>
+				<div></div>
 				<div></div>
 			</div>
 		</div>
 		<div>
 			<div>
 				<div></div>
+				<div></div>
 			</div>
 			<div>
+				<div></div>
 				<div></div>
 			</div>
 		</div>
 	</div>
-	<button>点击遍历</button>
+	<div id="controls">
+		<button data-value="preorder">前序遍历</button>
+		<button data-value="middleorder">中序遍历</button>
+		<button data-value="postorder">后序遍历</button>
+	</div>
 	<script type="text/javascript">
 		var rootNode = document.getElementById("root");
-		var button =document.getElementsByTagName("button")[0];
-		function mapTree (node,arr) {	//遍历二叉树至数组内
+		var controls = document.getElementById("controls");
+		function preOrder (node,arr) {	//前序
 			if(node){
 				delTextNode(node);
 				node.className = ""; //将所有classname变为空防止再次点击后因定时器阻塞导致的变蓝。
 				arr.push(node);
-				mapTree(node.firstChild,arr);
-				mapTree(node.lastChild,arr);
+				preOrder(node.firstChild,arr);
+				preOrder(node.lastChild,arr);
+			}
+		}
+		function middleOrder (node,arr) {			//中序
+			if(node){
+				delTextNode(node);
+				node.className = ""; 
+				middleOrder(node.firstChild,arr);
+				arr.push(node);
+				middleOrder(node.lastChild,arr);
+			}
+		}
+		function postOrder (node,arr) {			//后序
+			if(node){
+				delTextNode(node);
+				node.className = ""; 
+				postOrder(node.firstChild,arr);
+				postOrder(node.lastChild,arr);
+				arr.push(node);
 			}
 		}
 		function delTextNode (node){	//删除文本节点
@@ -58,17 +85,25 @@
 				}
 			}
 		}
-		button.onclick =function(){	//点击事件以触发动画
+		controls.onclick =function(e){	//点击事件以触发动画
+			var value = e.target.getAttribute("data-value");
+			if(!value) return;
 			clearInterval(this.time);		//每次执行清除上次的定时器
 			var arr = [];
 			var i = 0;
-			mapTree(rootNode,arr);		//使arr数组填满遍历后的二叉树节点
+			switch(value){
+				case "preorder" : preOrder (rootNode,arr);break;
+				case "middleorder" : middleOrder (rootNode,arr);break;
+				case "postorder" : postOrder (rootNode,arr);break;
+			}
+			console.log(arr.length);
 			this.time = setInterval(function(){		//将定时器变为属性便于再次执行时清除
 				if(i===0){
 					arr[i].className = "blue";
 					i++;					
-				}else if(i===arr.length){
-					clearInterval(button.time);		//当遍历结束清除定时器释放资源
+				}else if(i === arr.length){
+					arr[i-1].className ="";
+					clearInterval(controls.time);		//当遍历结束清除定时器释放资源
 				}else{
 					arr[i].className = "blue";	
 					arr[i-1].className = "";
