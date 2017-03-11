@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>二叉树遍历</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		div{
+			border: 1px solid black;
+			width: 40%;
+			height: 60%;
+			padding: 20px;
+			display: flex;
+			margin: 10px;
+		}
+		.blue{
+			background-color: blue;
+		}
+	</style>
+</head>
+<body>
+	<div id="root">
+		<div>
+			<div>
+				<div></div>
+			</div>
+			<div>
+				<div></div>
+			</div>
+		</div>
+		<div>
+			<div>
+				<div></div>
+			</div>
+			<div>
+				<div></div>
+			</div>
+		</div>
+	</div>
+	<button>点击遍历</button>
+	<script type="text/javascript">
+		var rootNode = document.getElementById("root");
+		var button =document.getElementsByTagName("button")[0];
+		function mapTree (node,arr) {	//遍历二叉树至数组内
+			if(node){
+				delTextNode(node);
+				node.className = ""; //将所有classname变为空防止再次点击后因定时器阻塞导致的变蓝。
+				arr.push(node);
+				mapTree(node.firstChild,arr);
+				mapTree(node.lastChild,arr);
+			}
+		}
+		function delTextNode (node){	//删除文本节点
+			if(node.nodeType != 1) return;
+			var children = node.childNodes;
+			for(var i = 0; i < children.length; i++){
+				if(children[i].nodeType == 3){
+					node.removeChild(children[i]);
+				}
+			}
+		}
+		button.onclick =function(){	//点击事件以触发动画
+			clearInterval(this.time);		//每次执行清除上次的定时器
+			var arr = [];
+			var i = 0;
+			mapTree(rootNode,arr);		//使arr数组填满遍历后的二叉树节点
+			this.time = setInterval(function(){		//将定时器变为属性便于再次执行时清除
+				if(i===0){
+					arr[i].className = "blue";
+					i++;					
+				}else if(i===arr.length){
+					clearInterval(button.time);		//当遍历结束清除定时器释放资源
+				}else{
+					arr[i].className = "blue";	
+					arr[i-1].className = "";
+					i++;
+				}
+			},500)
+		}
+	</script>
+</body>
+</html>
