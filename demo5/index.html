@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>自定义单选、复选框</title>
+	<style type="text/css">
+		#container{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			display: flex;
+			flex-direction: column;
+		}
+		input{
+			display: none;
+		}
+		.check-box+label,.radios+label{
+			width: 16px;
+			height: 16px;
+			border: 1px solid #d9d9d9;
+			display: block;
+			position: relative;
+			margin: 20px;
+		}
+		.radios+label{
+			border-radius: 50%;
+		}
+		.radio{
+			display: flex;
+		}
+		.check-box:checked+label,.radios:checked+label{
+			border-color: red;
+		}
+		.check-box:checked+label::after{
+			position: absolute;
+			content:'\2714';
+			color: red;
+			text-align: center;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%,-50%);
+		}
+		.radios:checked+label::after{
+			position: absolute;
+			content: "";
+			width: 8px;
+			height: 8px;
+			background-color: red;
+			border-radius: 50%;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%,-50%);
+		}
+	</style>
+</head>
+<body>	
+	<div id="container">
+		<h3>自定义单选、复选框，伪类实现</h3>
+		<div class="checkbox">
+			<input type="checkbox" class="check-box" id="check-box"/>
+			<label for="check-box"></label>
+		</div>
+		<div class="radio">
+			<input type="radio" class="radios" id="first-radio" name="a"/>
+			<label for="first-radio"></label>
+			<input type="radio" class="radios" id="second-radio" name="a"/>
+			<label for="second-radio"></label>
+		</div>
+	</div>
+</body>
+</html>
