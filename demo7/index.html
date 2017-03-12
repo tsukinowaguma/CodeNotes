@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>数据绑定1</title>
+	<script type="text/javascript">
+let data = {
+    user: {
+        name: "liangshaofeng",
+        age: "24"
+    },
+    address: {
+        city: "beijing"
+    }
+}
+function Observer(data){
+	this.data = data;
+	this.walk(data);
+}
+Observer.prototype = {
+	walk(obj){
+		let val;
+		for(let key in obj){
+			//过滤掉原型的属性
+			if(obj.hasOwnProperty){
+				val = obj[key];
+				//如果该属性的值为对象则给深层对象绑定
+				if(typeof val === 'object'){
+					new Observer(val);
+				}
+				this.convert(key, val);
+			}
+		}
+	},
+	convert(key,val){
+		Object.defineProperty(this.data, key, {
+			enumerable:true,
+			configurable:true,
+			get(){
+				console.log('你访问了' + key);
+				return val;
+			},
+			set(newVal){
+				console.log('你设置了' + key);
+				console.log('新的'+ key + '为: ' + newVal);
+				if(val == newVal) return;
+				val = newVal;
+			}
+		})
+	}	
+}	
+window.onload = function(){
+	new Observer(data);
+	document.getElementById("get").onclick = () => {
+		let user = data.user;
+		let name = data.user.name;
+		let age = data.user.age;
+	}
+	document.getElementById("set").onclick = () => {
+		data.user.name = "a";
+		data.address = {city:"shenzhen"};
+	}
+}
+
+	</script>
+</head>
+<body>	
+	<button id="get">获取</button>
+	<button id="set">设置</button>
+</body>
+</html>
