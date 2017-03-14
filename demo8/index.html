@@ -1,179 +1,127 @@
-<html class="pixel-ratio-2 retina watch-active-state">
+<!DOCTYPE html>
+</html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>无限加载</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="./framework7.ios.min.css">
-    <link rel="stylesheet" href="./framework7.ios.colors.min.css">
-    <script type="text/javascript" src="./framework7.min.js"></script>
   </head>
   <body>
-    <div class="views">
-      <div class="view view-main" data-page="home">
-        <div class="navbar">
-          <div class="navbar-inner">
-            <div class="left"></div>
-            <div class="center sliding" style="left: 0px;">Infinite Scroll</div>
-            <div class="right"></div>
-          </div>
-        </div>
-        <div class="pages navbar-through">
-          <div data-page="home" class="page">
-            <div class="page-content infinite-scroll">
-              <div class="list-block">
-                <ul>
-                  <li class="item-content">
-                    <div class="item-inner">
-                      <div class="item-title">Item 1</div>
-                    </div>
-                  </li>
-                  <li class="item-content">
-                    <div class="item-inner">
-                      <div class="item-title">Item 2</div>
-                    </div>
-                  </li>
-                  <li class="item-content">
-                    <div class="item-inner">
-                      <div class="item-title">Item 3</div>
-                    </div>
-                  </li>
-                  <li class="item-content">
-                    <div class="item-inner">
-                      <div class="item-title">Item 4</div>
-                    </div>
-                  </li>
-                  <li class="item-content">
-                    <div class="item-inner">
-                      <div class="item-title">Item 5</div>
-                    </div>
-                  </li>
-                  <li class="item-content">
-                    <div class="item-inner">
-                      <div class="item-title">Item 6</div>
-                    </div>
-                  </li>
-                  <li class="item-content">
-                    <div class="item-inner">
-                      <div class="item-title">Item 7</div>
-                    </div>
-                  </li>
-                  <li class="item-content">
-                    <div class="item-inner">
-                      <div class="item-title">Item 8</div>
-                    </div>
-                  </li>
-                  <li class="item-content">
-                    <div class="item-inner">
-                      <div class="item-title">Item 9</div>
-                    </div>
-                  </li>
-                  <li class="item-content">
-                    <div class="item-inner">
-                      <div class="item-title">Item 10</div>
-                    </div>
-                  </li>
-                  <li class="item-content">
-                    <div class="item-inner">
-                      <div class="item-title">Item 11</div>
-                    </div>
-                  </li>
-                  <li class="item-content">
-                    <div class="item-inner">
-                      <div class="item-title">Item 12</div>
-                    </div>
-                  </li>
-                  <li class="item-content">
-                    <div class="item-inner">
-                      <div class="item-title">Item 13</div>
-                    </div>
-                  </li>
-                  <li class="item-content">
-                    <div class="item-inner">
-                      <div class="item-title">Item 14</div>
-                    </div>
-                  </li>
-                  <li class="item-content">
-                    <div class="item-inner">
-                      <div class="item-title">Item 15</div>
-                    </div>
-                  </li>
-                  <li class="item-content">
-                    <div class="item-inner">
-                      <div class="item-title">Item 16</div>
-                    </div>
-                  </li>
-                  <li class="item-content">
-                    <div class="item-inner">
-                      <div class="item-title">Item 17</div>
-                    </div>
-                  </li>
-                  <li class="item-content">
-                    <div class="item-inner">
-                      <div class="item-title">Item 18</div>
-                    </div>
-                  </li>
-                  <li class="item-content">
-                    <div class="item-inner">
-                      <div class="item-title">Item 19</div>
-                    </div>
-                  </li>
-                  <li class="item-content">
-                    <div class="item-inner">
-                      <div class="item-title">Item 20</div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div class="infinite-scroll-preloader">
-                <div class="preloader"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div id="load-container">
+      <ul id="list" class="list">
+        <li>list</li>
+      </ul>
+      <div class="refresh">正在刷新...</div>
     </div>
-    <script type="text/javascript" src="./framework7.min.js"></script>
     <style>
-      .infinite-scroll-preloader {
-        margin-top:-20px;
-        margin-bottom: 10px;
-        text-align: center;
+      body{
+        background: #333;
       }
-      .infinite-scroll-preloader .preloader {
-        width:34px;
-        height:34px;
+      #load-container{
+        overflow: scroll;
+        overflow-x: hidden;
+        height: 600px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 500px;
+        margin: 100px auto;
+        border: 1px solid #d3d3d3;
+      }
+      #load-container > .list {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+      }
+      #load-container > .list > li{
+        padding: 20px 0px;
+        border: 1px solid #4060F1;
+        background-color: #F8FD4D;
+        text-align: center;
+        display: block;
+        width: 100%;
+      }
+      .list{
+        list-style: none;
+      }
+      .refresh{
+          width: 100%;
+          background-color: white;
+          text-align: center;
+          padding: 10px 0;
       }
     </style>
     <script>
-      var myApp = new Framework7();
+        var array = [];   
+        for(var i = 1; i <= 20; i++){
+          array.push("list" + i);    //循环遍历初始化20个li
+        }
+        function lazyLoad (container,max,perLoad){  //观察者模式,max为需要加载的数量，perLoad为每次刷新加载的数量
+          //container为需要延迟加载的容器，容器内需要存在class为list的列表和class为refresh的刷新栏
+          this.container = container; 
+          //list为容器内需要延迟加载的列表  
+          this.list = null;
+          //已加载的个数
+          this.lastindex = 20;
+          //如果传入的max存在且为数字则初始化否则默认为100
+          if(max  && typeof max === "number") this.max = max
+            else this.max = 100;
+          //同上 一次加载的数量
+          if(perLoad && typeof perLoad === "number") this.perLoad = perLoad;
+            else this.perLoad = 20;
+          //判断是否在加载中的flag
+          this.isload = false;
+        }
+        lazyLoad.prototype = {
+          init(){ //初始化传入list并添加事件
+              this.list = this.container.getElementsByClassName("list")[0];
+              this.container.onscroll = (e)=>this.handleLoad(e);
+          },
+          handleLoad(e){  //滚动事件
+            e.stopPropagation(); //阻止冒泡
+            if(this.lastindex >= this.max) {  //如果传满了则删除刷新提示栏
+              var refresh = this.container.getElementsByClassName("refresh")[0];
+              if(refresh){
+                this.container.removeChild(this.container.removeChild(refresh));
+              }else{
+                return;
+              }
+            }
 
-      var $$ = Dom7;
-      var loading = false;
-      var lastIndex = $$('.list-block li').length;
-      var maxItems = 60;
-      var itemsPerLoad = 20;
-      $$('.infinite-scroll').on('infinite', function () {
-        if (loading) return;
-        loading = true;
-        setTimeout(function () {
-          loading = false;
-          if (lastIndex >= maxItems) {
-            myApp.detachInfiniteScroll($$('.infinite-scroll'));
-            $$('.infinite-scroll-preloader').remove();
-            return;
+            if(this.container.scrollHeight  - this.container.scrollTop - this.container.offsetHeight <= 0 ){//检测是否到底部
+              //如果正在加载则返回
+              if(this.isload == true) return;
+              this.isload = true;
+              var html = this.list.innerHTML;
+              //遍历加载
+              for(var i = this.lastindex+1 ; i <= this.lastindex+this.perLoad ; i++){
+                //如果循环超出了最大限量则退出循环
+                if(i > this.max) {
+                   break;
+                }else{
+                   html += "<li>list" + i + "</li>"
+                }
+              }
+              var  _this = this;
+              //模仿AJAX异步加载
+              setTimeout(function(){
+                  _this.isload=false;
+                  _this.list.innerHTML=html; 
+                  _this.lastindex  += _this.perLoad;     
+              },1000)
+            }
           }
+        }
+        window.onload = function(){
           var html = '';
-          for (var i = lastIndex + 1; i <= lastIndex + itemsPerLoad; i++) {
-            html += '<li class="item-content"><div class="item-inner"><div class="item-title">Item ' + i + '</div></div></li>';
-          }
-          $$('.list-block ul').append(html);
-          lastIndex = $$('.list-block li').length;
-        }, 1000);
-      });
-
+          //初始化加载20个li
+          array.map(function(item){
+              html += "<li>" + item + "</li>";
+          });
+          //创建延迟加载对象
+          document.getElementById("list").innerHTML= html;
+          new lazyLoad(document.getElementById("load-container")).init();
+          
+        }
     </script>
 
-</body></html>
+</body>
+</html>
