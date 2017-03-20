@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>css-loading</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#wrap{
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+		}
+		#container{
+			position: relative;
+		}
+		#out-border-circle{
+			width: 140px;
+			height: 140px;
+			border-radius: 50%;
+			border: 2px solid rgb(255,41,140);
+			border-top-color: transparent;
+			animation: out-rotate 1s infinite linear;
+		}
+		#bg-circle{
+			width: 0;
+			height: 0;
+			border-radius: 100px;
+			border: 50px solid rgb(255,41,140);
+   			border-right-color: rgb(251,139,189);
+    		border-top-color: rgb(251,139,189);
+    		transform: rotate(45deg);
+			position: absolute;
+			left: 20px;
+			top: 20px;
+			z-index:0;
+		}
+		#left-half-circle{
+			width: 0;
+			height: 0;
+			border-radius: 100px;
+			border: 50px solid rgb(255,41,140);
+			border-right-color: transparent;
+			border-top-color: transparent;
+			position: absolute;
+			transform: rotate(45deg);
+			left: 20px;
+			top: 20px;
+			animation: leftShow 2s infinite linear;
+			z-index: 2;
+		}
+		#right-half-circle{
+			width: 0;
+			height: 0;
+			border-radius: 100px;
+			border: 50px solid rgb(251,139,189);
+			border-left-color: transparent;
+			border-bottom-color: transparent;
+			position: absolute;
+			transform: rotate(45deg);
+			left: 20px;
+			top: 20px;
+			z-index: 0;
+			animation: rightShow 2s infinite linear;
+			animation-delay: 0.5s;
+		}
+		@keyframes out-rotate{
+			from{transform: rotate(45deg);}
+			to{transform: rotate(-315deg);}
+		}
+		@keyframes leftShow{
+			0%{transform: rotate(45deg);}
+			25%{transform: rotate(-135deg);}
+			50%{transform: rotate(-135deg);}
+			75%{transform: rotate(-315deg);}
+			100%{transform: rotate(-315deg);}
+		}
+		@keyframes rightShow{
+			0%{transform: rotate(45deg);z-index: 1;}
+			25%{transform: rotate(-135deg);z-index:1;}
+			25.1%{z-index: 2;}
+			50%{transform: rotate(-135deg);z-index: 2;}
+			75%{transform: rotate(-315deg);z-index: 2;}
+			100%{transform: rotate(-315deg);z-index: 0;}
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<div id="container">
+			<div id="bg-circle"></div>
+			<div id="left-half-circle"></div>
+			<div id="right-half-circle"></div>
+			<div id="out-border-circle"></div>
+		</div>
+	</div>
+</body>
+</html>
