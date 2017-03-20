@@ -116,7 +116,7 @@ colorSelector.prototype = {
 			b = 0;
 		}
 		this.tailrgb = [r,g,b];	//改变颜色盘的尾部颜色
-		this.selecthsb[0] = 360 * Ypercent;
+		this.selecthsb[0] = Math.round(360 * Ypercent);
 		this.setSelector(); //重新绘制颜色盘
 		this.setColorRGB(this.ClickX,this.ClickY);	//点击转轴要重新获取一遍颜色值
 		this.paintSelectorPointer(this.ClickX,this.ClickY);	//绘制颜色盘指针
@@ -127,11 +127,11 @@ colorSelector.prototype = {
 		var pos = this.getPosition(e);
 		var posX = this.ClickX = pos.posX;
 		var posY = this.ClickY = pos.posY;
+		this.selecthsb[2] = Math.round(100 * (1 - posY / this.selector.height));
+		this.selecthsb[1] = Math.round(100 * posX / this.selector.width);
 		//设置this.selectRGB的值
 		this.setColorRGB(posX,posY);	
 		this.paintSelectorPointer(posX,posY);
-		this.selecthsb[2] = 100 * (1 - posY / this.selector.height);
-		this.selecthsb[1] = 100 * posX / this.selector.width;
 	},
 	setColorRGB(posX,posY){ //设置当前指针的颜色的RGB值
 		var r,g,b;
